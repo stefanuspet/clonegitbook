@@ -102,7 +102,49 @@
                             Jenis Artikel
                         </a>
                     </li>
+                    <li class="px-2">
+                        <button type="button" class="flex items-center w-full p-2 text-base  transition duration-75 rounded-lg group  text-white hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example" id="dropdown-button">
+                            <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path fill="currentColor" d="M96 0C43 0 0 43 0 96L0 416c0 53 43 96 96 96l288 0 32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l0-64c17.7 0 32-14.3 32-32l0-320c0-17.7-14.3-32-32-32L384 0 96 0zm0 384l256 0 0 64L96 448c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16l192 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-192 0c-8.8 0-16-7.2-16-16zm16 48l192 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-192 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
+                            </svg>
+                            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Space</span>
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <ul id="dropdown-example" class="hidden py-2 space-y-2">
+                            <li>
+                                <form action="{{route('space.store')}}" method="POST">
+                                    @csrf
+                                    @method("POST")
+                                    <button type="submit" class="flex gap-x-3 items-center w-full p-2  transition duration-75 rounded-lg pl-11 group  text-white hover:bg-gray-700">
+                                        <span>Add Space</span>
+                                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                            <path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z" />
+                                        </svg>
+                                    </button>
+                                </form>
+                            </li>
+                            @foreach($spaces as $space)
+                            <li>
+                                <a href="{{ route('user.space.show', $space->id) }}" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-5 group text-white hover:bg-gray-700">
+                                    <form action="{{ route('space.destroy', ['id' => $space->id]) }}" method="POST" class=" pr-5 flex items-center gap-x-3">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="">
+                                            <svg class="w-3 h-3 hover:text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                                <path fill="currentColor" d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                                            </svg>
+                                        </button>
+                                    </form>
+                                    <img class="w-5 h-5 mr-2 object-cover" src="{{ asset('storage/' .$space->image_url) }}" alt="{{ $space->title }}">
 
+                                    {{ $space->title }}
+                                </a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </li>
                     <li class="px-2">
                         <form action="{{route('logout')}}" method="post" class="w-full">
                             @csrf
@@ -125,3 +167,13 @@
         <!-- Sidebar Menu -->
     </div>
 </aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdownButton = document.getElementById('dropdown-button');
+        const dropdownMenu = document.getElementById('dropdown-example');
+
+        dropdownButton.addEventListener('click', function() {
+            dropdownMenu.classList.toggle('hidden');
+        });
+    });
+</script>

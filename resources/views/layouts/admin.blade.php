@@ -18,7 +18,7 @@
 
 <body class="font-sans antialiased">
     <div class="flex h-screen overflow-hidden">
-        <x-sidebar-admin />
+        <x-sidebar-admin :spaces=$spacesAdmin />
         <div class="relative flex flex-1 flex-col overflow-y-auto scrollbar-hide overflow-x-hidden bg-[#22272E]">
             <x-header-admin />
             <main>

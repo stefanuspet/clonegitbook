@@ -12,9 +12,9 @@ class SpaceController extends Controller
 {
     public function index($spaceId)
     {
-        if (Auth::user()->role !== 'user') {
-            abort(403, 'Unauthorized action.');
-        }
+        // if (Auth::user()->role !== 'user') {
+        //     abort(403, 'Unauthorized action.');
+        // }
 
         $user = Auth::user();
         $spaces = $user->spaces()->get();

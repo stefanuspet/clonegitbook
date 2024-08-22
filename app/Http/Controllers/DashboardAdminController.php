@@ -17,9 +17,11 @@ class DashboardAdminController extends Controller
         }
 
         $spaces = Space::all();
+        $spacesAdmin = Space::where('user_id', Auth::user()->id)->get();
         // Kembalikan tampilan dengan data halaman
         return view('admin.dashboard', [
             'spaces' => $spaces,
+            'spacesAdmin' => $spacesAdmin,
         ]);
     }
 
